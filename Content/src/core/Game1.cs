@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using ZenGarden.Content.src.entities;
+using ZenGarden.Content.src.helpers;
 using ZenGarden.Content.src.structures;
 
 namespace ZenGarden
@@ -51,8 +52,10 @@ namespace ZenGarden
             //Mouse
             mouseTexture = graphicsHandler.generateTexture("assets\\textures\\ui\\mouse.png");
 
-            s = new Sand(100,100,50);
-            uds.addUD(s);
+            //s = new Sand(100,100,50);
+            //uds.addUD(s);
+
+           uds.addUD(new Sandbox(10,10,5));
 
         }
 

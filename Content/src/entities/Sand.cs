@@ -1,11 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ZenGarden.Content.src.entities
 {
@@ -20,8 +14,7 @@ namespace ZenGarden.Content.src.entities
 
         internal override void Update()
         {
-            MouseState ms = Mouse.GetState();
-            if(grain.Contains(ms.Position))
+            if(grain.Contains(Game1.Instance.mouseState.Position))
                 col = new Color(255,200,0);
         }
         internal override void Draw()
