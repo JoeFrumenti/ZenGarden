@@ -16,6 +16,11 @@ namespace ZenGarden.Content.src.entities
             tex.SetData(new[] { Color.White});
         }
 
+        internal void Reset()
+        {
+            col = new Color (255,255,0);
+        }
+
         internal override void Update()
         {
             if(grain.Contains(Game1.Instance.mouseState.Position))

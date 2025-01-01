@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,9 +20,6 @@ namespace ZenGarden.Content.src.helpers
             grainSize = size;
 
 
-
-
-
             for(int i = 0; i < x * size; i += size)
             {
                 grains.Add(new List<Sand>());
@@ -40,19 +38,28 @@ namespace ZenGarden.Content.src.helpers
             int mouseY = Game1.Instance.mouseState.Position.Y;
 
             Vector2 hoverOver = new Vector2(mouseX/grainSize,mouseY/grainSize);
-            try {
-                grains[(int)hoverOver.X][(int)hoverOver.Y].Update();
-            }
-            catch(System.ArgumentOutOfRangeException)
+            if(Game1.Instance.mouseState.LeftButton == ButtonState.Pressed) 
             {
+                try {
+                    grains[(int)hoverOver.X][(int)hoverOver.Y].Update();
+                }
+                catch(System.ArgumentOutOfRangeException)
+                {
 
+                }
             }
-            finally
+            if (Game1.Instance.kh.keyPressed(Keys.R))
             {
-
+                foreach (List<Sand> gra in grains)
+                {
+                    foreach (Sand gra2 in gra)
+                    {
+                        gra2.Reset();
+                    }
+                }
             }
-
-            }
+            
+        }
 
         internal override void Draw()
         {

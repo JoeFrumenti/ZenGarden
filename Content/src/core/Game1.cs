@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Input;
 using ZenGarden.Content.src.entities;
 using ZenGarden.Content.src.helpers;
 using ZenGarden.Content.src.structures;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace ZenGarden
 {
@@ -50,12 +51,17 @@ namespace ZenGarden
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             //Mouse
-            mouseTexture = graphicsHandler.generateTexture("assets\\textures\\ui\\mouse.png");
+            mouseTexture = new Texture2D(spriteBatch.GraphicsDevice, 1, 1);
+            mouseTexture.SetData(new[] { Color.White });
 
             //s = new Sand(100,100,50);
             //uds.addUD(s);
+            int w = GraphicsDevice.Viewport.Width;
+            int h = GraphicsDevice.Viewport.Height;
 
-           uds.addUD(new Sandbox(100,100,5));
+            int sandSize = 100;
+
+            uds.addUD(new Sandbox(w/sandSize + sandSize,h/sandSize + sandSize,sandSize));
 
         }
 
@@ -82,7 +88,7 @@ namespace ZenGarden
             uds.Draw();
 
             spriteBatch.Begin();
-            spriteBatch.Draw(mouseTexture, new Vector2(mouseState.X, mouseState.Y), Color.White);
+            spriteBatch.Draw(mouseTexture, new Rectangle(mouseState.X, mouseState.Y, 5,5), Color.Gray);
             spriteBatch.End();
 
             base.Draw(gameTime);
