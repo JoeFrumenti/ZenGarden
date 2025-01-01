@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using ZenGarden.Content.src.entities;
 using ZenGarden.Content.src.structures;
 
 namespace ZenGarden
@@ -24,6 +25,7 @@ namespace ZenGarden
 
         //objects
         internal UDHandler uds;
+        private Sand s;
 
 
         public Game1()
@@ -49,6 +51,8 @@ namespace ZenGarden
             //Mouse
             mouseTexture = graphicsHandler.generateTexture("assets\\textures\\ui\\mouse.png");
 
+            s = new Sand(100,100,50);
+            uds.addUD(s);
 
         }
 
