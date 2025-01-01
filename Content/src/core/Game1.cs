@@ -55,7 +55,7 @@ namespace ZenGarden
             //s = new Sand(100,100,50);
             //uds.addUD(s);
 
-           uds.addUD(new Sandbox(10,10,5));
+           uds.addUD(new Sandbox(100,100,5));
 
         }
 
