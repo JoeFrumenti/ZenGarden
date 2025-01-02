@@ -26,8 +26,31 @@ namespace ZenGarden.Content.src.entities
         private void moveKoi(Sandbox s)
         {
             if(s.gh.getGrainType(this.pos) == "water")
-                this.pos.X ++;
+            {
+                //get water in adjacent directions
+                int currentX = (int)this.pos.X / s.grainSize;
+                int currentY = (int)this.pos.Y / s.grainSize;
+
+                List<Vector2> possibleDirections = new List<Vector2>();
+                
+                bool open = true;
+                for (int i = 0; i < 3; i ++)
+                {
+                    if(s.gh.getGrainType(currentX - 1, currentY + i - 1) != "water")
+                        open = false;
+                }
+                if(open)
+                    possibleDirections.Add(new Vector2(-1, 0));
+
+                foreach (Vector2 direction in possibleDirections)
+                    Console.WriteLine(direction);
+
+
+                foreach(Vector2 direction in possibleDirections)
+                    pos += direction;
+            }
         }
+       
 
         internal void Update(Sandbox s)
         {
