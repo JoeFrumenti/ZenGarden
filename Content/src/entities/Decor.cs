@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ZenGarden.Content.src.helpers;
 
 namespace ZenGarden.Content.src.entities
 {
@@ -22,11 +23,17 @@ namespace ZenGarden.Content.src.entities
             org = new Vector2(img.Width / 2, img.Height / 2);
             this.type = type;
         }
-        internal void Update()
+        private void moveKoi(Sandbox s)
+        {
+            if(s.gh.getGrainType(this.pos) == "water")
+                this.pos.X ++;
+        }
+
+        internal void Update(Sandbox s)
         {
             if(type == "koi")
             {
-                pos.X ++;
+                moveKoi(s);
             }
         }
 

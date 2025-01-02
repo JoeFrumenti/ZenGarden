@@ -24,7 +24,10 @@ namespace ZenGarden.Content.src.entities
             col = new Color (255,255,0);
         }
 
-       
+       internal string getType()
+        {
+            return type;
+        }
         internal void Draw()
         {
             Game1.Instance.spriteBatch.Draw(tex, pos, col);

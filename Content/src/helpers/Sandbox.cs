@@ -31,7 +31,7 @@ namespace ZenGarden.Content.src.helpers
             ds = new drawState("pixel", 1, new Color(255,230,0));
             skm = new SandboxKeyMap();
             decorations = new List<Decor>();
-            gh = new GrainHandler();
+            gh = new GrainHandler(grainSize);
         }
 
         internal override void Update()
@@ -39,7 +39,7 @@ namespace ZenGarden.Content.src.helpers
             
             skm.Update(this);
             foreach (Decor decor in decorations) {
-                decor.Update();
+                decor.Update(this);
             }
         }
 

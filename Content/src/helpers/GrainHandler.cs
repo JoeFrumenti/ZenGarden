@@ -10,8 +10,10 @@ namespace ZenGarden.Content.src.helpers
 {
     internal class GrainHandler
     {
-        public GrainHandler() { 
+        private int grainSize;
+        public GrainHandler(int g) { 
             grains = new List<Grain>();
+            grainSize = g;
         }
 
         private List<Grain> grains;
@@ -19,6 +21,18 @@ namespace ZenGarden.Content.src.helpers
         internal List<Grain> getGrains()
         {
             return grains;
+        }
+
+        internal string getGrainType(Vector2 pos)
+        {
+            foreach(var grain in grains) {
+                Rectangle check = new Rectangle((int)grain.pos.X,(int)grain.pos.Y,grainSize,grainSize);
+                if(check.Contains(pos)) 
+                    return grain.getType();
+                
+            }
+
+            return "lightSand";
         }
 
         private int getGrainByPos(int x, int y)
