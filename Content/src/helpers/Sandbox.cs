@@ -14,7 +14,7 @@ namespace ZenGarden.Content.src.helpers
     internal class Sandbox : UD
     {
         internal GrainHandler gh;
-        internal List<Decor> decorations;
+        internal DecorHandler decorations;
 
         internal int grainSize;
         private int width;
@@ -30,7 +30,7 @@ namespace ZenGarden.Content.src.helpers
             grainSize = size;
             ds = new drawState("pixel", 1, new Color(255,230,0));
             skm = new SandboxKeyMap();
-            decorations = new List<Decor>();
+            decorations = new DecorHandler();
             gh = new GrainHandler(grainSize);
         }
 
@@ -38,7 +38,7 @@ namespace ZenGarden.Content.src.helpers
         {
             
             skm.Update(this);
-            foreach (Decor decor in decorations) {
+            foreach (Decor decor in decorations.getDecors()) {
                 decor.Update(this);
             }
         }
@@ -52,7 +52,7 @@ namespace ZenGarden.Content.src.helpers
                     gh.getGrains()[i][j].Draw();
                 }
             }
-            foreach(Decor decor in decorations)
+            foreach(Decor decor in decorations.getDecors())
             {
                 decor.Draw();
             }
