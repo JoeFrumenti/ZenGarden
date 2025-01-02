@@ -19,14 +19,20 @@ namespace ZenGarden.Content.src.helpers
             if(ms.LeftButton == ButtonState.Pressed) {
                 switch (s.ds.type)
                 {
-                    case "pixel":
-                        int xPos = mouseX - mouseX % s.grainSize;
-                        int yPos = mouseY - mouseY % s.grainSize;
-                        s.gh.addGrain(new Grain(xPos, yPos, s.grainSize, s.ds.col));
-                        break;
+                    
                     case "pFlower":
                         if(pms.LeftButton != ButtonState.Pressed) 
-                            s.decorations.Add(new Decor(mouseX, mouseY, "decor\\pFlower.png"));
+                            s.decorations.Add(new Decor(mouseX, mouseY, "decor\\pFlower.png", "idle"));
+                        break;
+                    case "koi":
+                        if (pms.LeftButton != ButtonState.Pressed)
+                            s.decorations.Add(new Decor(mouseX, mouseY, "decor\\fish.png", "koi"));
+                        break;
+
+                    default:
+                        int xPos = mouseX - mouseX % s.grainSize;
+                        int yPos = mouseY - mouseY % s.grainSize;
+                        s.gh.addGrain(new Grain(xPos, yPos, s.grainSize, s.ds.col, s.ds.type));
                         break;
                 }
             }
@@ -35,23 +41,27 @@ namespace ZenGarden.Content.src.helpers
 
             if (Game1.Instance.kh.keyPressed(Keys.L))
             {
-                s.ds.type = "pixel";
+                s.ds.type = "lightSand";
                 s.ds.col = new Color(255,255,0);
 
             }
             else if (Game1.Instance.kh.keyPressed(Keys.D))
             {
-                s.ds.type = "pixel";
+                s.ds.type = "darkSand";
                 s.ds.col = new Color(255,230,0);
             }
             else if (Game1.Instance.kh.keyPressed(Keys.W))
             {
-                s.ds.type = "pixel";
+                s.ds.type = "water";
                 s.ds.col = new Color(0,0,255);
             }
             else if (Game1.Instance.kh.keyPressed(Keys.F))
             {
                 s.ds.type = "pFlower";
+            }
+            else if (Game1.Instance.kh.keyPressed(Keys.K))
+            {
+                s.ds.type = "koi";
             }
             else if (Game1.Instance.kh.keyPressed(Keys.R))
             {

@@ -38,6 +38,9 @@ namespace ZenGarden.Content.src.helpers
         {
             
             skm.Update(this);
+            foreach (Decor decor in decorations) {
+                decor.Update();
+            }
         }
 
         internal override void Draw()
