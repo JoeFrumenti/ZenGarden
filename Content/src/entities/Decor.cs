@@ -33,6 +33,7 @@ namespace ZenGarden.Content.src.entities
 
                 List<Vector2> possibleDirections = new List<Vector2>();
                 
+                //left
                 bool open = true;
                 for (int i = 0; i < 3; i ++)
                 {
@@ -42,8 +43,37 @@ namespace ZenGarden.Content.src.entities
                 if(open)
                     possibleDirections.Add(new Vector2(-1, 0));
 
-                foreach (Vector2 direction in possibleDirections)
-                    Console.WriteLine(direction);
+                //up
+                open = true;
+                for (int i = 0; i < 3; i++)
+                {
+                    if (s.gh.getGrainType(currentX + i - 1, currentY - 1) != "water")
+                        open = false;
+                }
+                if (open)
+                    possibleDirections.Add(new Vector2(0, -1));
+
+                //right
+                open = true;
+                for (int i = 0; i < 3; i++)
+                {
+                    if (s.gh.getGrainType(currentX + 1, currentY + i - 1) != "water")
+                        open = false;
+                }
+                if (open)
+                    possibleDirections.Add(new Vector2(1, 0));
+
+                //down
+                open = true;
+                for (int i = 0; i < 3; i++)
+                {
+                    if (s.gh.getGrainType(currentX + i - 1, currentY + 1) != "water")
+                        open = false;
+                }
+                if (open)
+                    possibleDirections.Add(new Vector2(0, 1));
+
+
 
 
                 foreach(Vector2 direction in possibleDirections)
