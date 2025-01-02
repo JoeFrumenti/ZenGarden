@@ -45,9 +45,12 @@ namespace ZenGarden.Content.src.helpers
 
         internal override void Draw()
         {
-            foreach (Grain g in gh.getGrains())
+            for(int i = 0; i < gh.getGrains().Count; i++) 
             {
-                g.Draw();
+                for(int j = 0; j < gh.getGrains()[i].Count; j++) 
+                {
+                    gh.getGrains()[i][j].Draw();
+                }
             }
             foreach(Decor decor in decorations)
             {

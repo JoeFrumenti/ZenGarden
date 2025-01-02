@@ -11,47 +11,44 @@ namespace ZenGarden.Content.src.helpers
     internal class GrainHandler
     {
         private int grainSize;
+        private List<List<Grain>> grains;
         public GrainHandler(int g) { 
-            grains = new List<Grain>();
+            grains = new List<List<Grain>>();
             grainSize = g;
+
+            int screenWidth = Game1.Instance.GraphicsDevice.Viewport.Width;
+            int screenHeight = Game1.Instance.GraphicsDevice.Viewport.Height;
+
+            for(int i = 0; i < screenWidth;  i+=grainSize) {
+                grains.Add(new List<Grain>());
+                for(int j = 0; j < screenHeight; j+=grainSize) {
+                    grains[i/grainSize].Add(new Grain(i,j,grainSize,new Color(255,255,0), "lightSand"));
+                }
+            }
         }
 
-        private List<Grain> grains;
 
-        internal List<Grain> getGrains()
+        internal List<List<Grain>> getGrains()
         {
             return grains;
         }
 
         internal string getGrainType(Vector2 pos)
         {
-            foreach(var grain in grains) {
-                Rectangle check = new Rectangle((int)grain.pos.X,(int)grain.pos.Y,grainSize,grainSize);
-                if(check.Contains(pos)) 
-                    return grain.getType();
-                
-            }
-
-            return "lightSand";
+            int i = (int)pos.X/grainSize;
+            int j = (int)pos.Y/grainSize;
+            return grains[i][j].getType();
         }
 
-        private int getGrainByPos(int x, int y)
+        private int getGrainByPos(Vector2 pos)
         {
-            for(int i = 0; i < grains.Count; i++)
-            {
-                Vector2 pos = new Vector2(grains[i].pos.X, grains[i].pos.Y);
-                if(pos.X == x && pos.Y == y)
-                    return i;
-            }
-            return -1;
+            return 0;
         }
         internal void addGrain(Grain grain)
         {
-            int index = getGrainByPos(grain.pos.X, grain.pos.Y);
-            if(index < 0)
-                grains.Add(grain);
-            else
-                grains[index] = grain;
+            int i = (int)grain.pos.X / grainSize;
+            int j = (int)grain.pos.Y / grainSize;
+            grains[i][j] = grain;
         }
             
         internal void Clear()
