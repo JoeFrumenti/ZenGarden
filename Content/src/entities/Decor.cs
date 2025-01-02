@@ -2,9 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 using ZenGarden.Content.src.helpers;
 
 namespace ZenGarden.Content.src.entities
@@ -15,6 +13,14 @@ namespace ZenGarden.Content.src.entities
         private Vector2 org;
         Texture2D img;
         string type;
+
+        Thread thread;
+
+        //koi
+        float swimTimer = 0;
+        Vector2 swimDir = new Vector2(0,0);
+        float koiSpeed = 100;
+
         public Decor(int x, int y, string filePath, string type)
         {
 
@@ -23,6 +29,25 @@ namespace ZenGarden.Content.src.entities
             org = new Vector2(img.Width / 2, img.Height / 2);
             this.type = type;
         }
+
+        private bool checkWater(Vector2 dir,Sandbox s)
+        {
+
+            int currentX = (int)this.pos.X / s.grainSize;
+            int currentY = (int)this.pos.Y / s.grainSize;
+
+            return (s.gh.getGrainType(currentX + (int)dir.X * 2, currentY + (int)dir.Y * 2) == "water");
+                
+        }
+
+        private void swim(Vector2 dir)
+        {
+            float deltaTime = (float)Game1.Instance.CurrentGameTime.ElapsedGameTime.TotalSeconds;
+            pos += dir * deltaTime * koiSpeed;
+            swimTimer -= deltaTime;
+            
+        }
+
         private void moveKoi(Sandbox s)
         {
             if(s.gh.getGrainType(this.pos) == "water")
@@ -34,52 +59,36 @@ namespace ZenGarden.Content.src.entities
                 List<Vector2> possibleDirections = new List<Vector2>();
                 
                 //left
-                bool open = true;
-                for (int i = 0; i < 3; i ++)
-                {
-                    if(s.gh.getGrainType(currentX - 1, currentY + i - 1) != "water")
-                        open = false;
-                }
-                if(open)
-                    possibleDirections.Add(new Vector2(-1, 0));
-
-                //up
-                open = true;
-                for (int i = 0; i < 3; i++)
-                {
-                    if (s.gh.getGrainType(currentX + i - 1, currentY - 1) != "water")
-                        open = false;
-                }
-                if (open)
-                    possibleDirections.Add(new Vector2(0, -1));
+                if (checkWater(new Vector2(-1,0),s))
+                    possibleDirections.Add(new Vector2(-1,0));
 
                 //right
-                open = true;
-                for (int i = 0; i < 3; i++)
-                {
-                    if (s.gh.getGrainType(currentX + 1, currentY + i - 1) != "water")
-                        open = false;
-                }
-                if (open)
+                if (checkWater(new Vector2(1, 0), s))
                     possibleDirections.Add(new Vector2(1, 0));
 
-                //down
-                open = true;
-                for (int i = 0; i < 3; i++)
-                {
-                    if (s.gh.getGrainType(currentX + i - 1, currentY + 1) != "water")
-                        open = false;
-                }
-                if (open)
+                //up
+                if (checkWater(new Vector2(0, 1), s))
                     possibleDirections.Add(new Vector2(0, 1));
 
+                //down
+                if (checkWater(new Vector2(0, -1), s))
+                    possibleDirections.Add(new Vector2(0, -1));
 
-                if(possibleDirections.Count > 0) { 
-                    pos += possibleDirections[0];
 
-                    Console.WriteLine(possibleDirections[0]);
+                    //Console.WriteLine(possibleDirections[0]);
+                
+                if(swimTimer <=0 && possibleDirections.Count > 0)
+                {
+                    swimTimer = 1;
+                    swimDir = possibleDirections[0];
                 }
+
+                if(swimTimer > 0)
+                { 
+                    swim(swimDir);
+                    Console.WriteLine(swimTimer);
                 }
+            }
         }
        
 
