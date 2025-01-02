@@ -94,9 +94,7 @@ namespace ZenGarden.Content.src.entities
 
         internal override void Update(Sandbox s)
         {
-                Console.WriteLine("Updating koi");
-                moveKoi(s);
-            
+            moveKoi(s);
         }
 
        
