@@ -25,7 +25,6 @@ namespace ZenGarden.Content.src.structures
         {
             this.game = game;
             spriteBatch = game.spriteBatch;
-            Console.WriteLine(assetPath);
         }
 
         internal void setGametime(GameTime gametime)

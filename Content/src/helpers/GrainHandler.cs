@@ -25,7 +25,6 @@ namespace ZenGarden.Content.src.helpers
                     grains[i/grainSize].Add(new Grain(i,j,grainSize,new Color(255,255,0), "lightSand"));
                 }
             }
-            Console.WriteLine((grains.Count, " ", grains[0].Count));
         }
 
 

@@ -39,7 +39,8 @@ namespace ZenGarden.Content.src.entities
             int currentX = (int)this.pos.X / s.grainSize;
             int currentY = (int)this.pos.Y / s.grainSize;
 
-            return (s.gh.getGrainType(currentX + (int)dir.X * 2, currentY + (int)dir.Y * 2) == "water");
+            return (s.gh.getGrainType(currentX + (int)dir.X, currentY + (int)dir.Y) == "water" &&
+                    s.gh.getGrainType(currentX + (int)dir.X * 2, currentY + (int)dir.Y * 2) == "water");
                 
         }
 
@@ -87,11 +88,10 @@ namespace ZenGarden.Content.src.entities
                     possibleDirections.Add(new Vector2(0, -1));
 
 
-                    //Console.WriteLine(possibleDirections[0]);
                 
                 if(swimWaitTimer <=0 && swimTimer <=0 && possibleDirections.Count > 0)
                 {
-                    swimWaitTimer = 1;
+                    swimWaitTimer = 1 + (float)(random.NextDouble() * 2);
                     swimDir = possibleDirections[random.Next(0,possibleDirections.Count)];
                 }
 

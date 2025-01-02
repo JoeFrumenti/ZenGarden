@@ -69,7 +69,7 @@ namespace ZenGarden.Content.src.helpers
             }
             else if (Game1.Instance.kh.keyPressed(Keys.R))
             {
-                s.gh.Clear();
+                s.gh = new GrainHandler(s.grainSize);
                 s.decorations.Clear();
 
             }
