@@ -22,7 +22,7 @@ namespace ZenGarden.Content.src.helpers
                     case "pixel":
                         int xPos = mouseX - mouseX % s.grainSize;
                         int yPos = mouseY - mouseY % s.grainSize;
-                        s.grains.Add(new Grain(xPos, yPos, s.grainSize, s.ds.col));
+                        s.gh.addGrain(new Grain(xPos, yPos, s.grainSize, s.ds.col));
                         break;
                     case "pFlower":
                         if(pms.LeftButton != ButtonState.Pressed) 
@@ -42,7 +42,7 @@ namespace ZenGarden.Content.src.helpers
             else if (Game1.Instance.kh.keyPressed(Keys.D))
             {
                 s.ds.type = "pixel";
-                s.ds.col = new Color(255,240,0);
+                s.ds.col = new Color(255,230,0);
             }
             else if (Game1.Instance.kh.keyPressed(Keys.W))
             {
@@ -55,7 +55,7 @@ namespace ZenGarden.Content.src.helpers
             }
             else if (Game1.Instance.kh.keyPressed(Keys.R))
             {
-                s.grains.Clear();
+                s.gh.Clear();
                 s.decorations.Clear();
 
             }

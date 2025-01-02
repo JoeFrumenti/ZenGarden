@@ -13,8 +13,7 @@ namespace ZenGarden.Content.src.helpers
 {
     internal class Sandbox : UD
     {
-
-        internal List<Grain> grains;
+        internal GrainHandler gh;
         internal List<Decor> decorations;
 
         internal int grainSize;
@@ -29,10 +28,10 @@ namespace ZenGarden.Content.src.helpers
         public Sandbox(int size)
         {
             grainSize = size;
-            ds = new drawState("darkSand", 1, new Color(255,230,0));
+            ds = new drawState("pixel", 1, new Color(255,230,0));
             skm = new SandboxKeyMap();
             decorations = new List<Decor>();
-            grains = new List<Grain>();
+            gh = new GrainHandler();
         }
 
         internal override void Update()
@@ -43,7 +42,7 @@ namespace ZenGarden.Content.src.helpers
 
         internal override void Draw()
         {
-            foreach (Grain g in grains)
+            foreach (Grain g in gh.getGrains())
             {
                 g.Draw();
             }
