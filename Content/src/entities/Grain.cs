@@ -5,7 +5,7 @@ namespace ZenGarden.Content.src.entities
 {
     internal class Grain
     {
-        private Rectangle pos;
+        internal Rectangle pos;
         private Color col;
         Texture2D tex;
         public Grain(int x, int y, int size, Color col) {
