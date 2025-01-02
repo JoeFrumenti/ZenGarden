@@ -2,73 +2,49 @@
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ZenGarden.Content.src.entities;
+using Color = Microsoft.Xna.Framework.Color;
 
 namespace ZenGarden.Content.src.helpers
 {
     internal class Sandbox : UD
     {
 
-        private List<List<Sand>> grains = new List<List<Sand>>();
-        private int grainSize;
+        internal List<Grain> grains;
 
-        public Sandbox(int x, int y, int size)
+        internal int grainSize;
+        private int width;
+        private int height;
+
+        public drawState ds;
+
+        private SandboxKeyMap skm;
+
+
+        public Sandbox(int size)
         {
             grainSize = size;
+            ds = new drawState("darkSand", 1, new Color(255,255,0));
+            skm = new SandboxKeyMap();
 
-
-            for(int i = 0; i < x * size; i += size)
-            {
-                grains.Add(new List<Sand>());
-                for(int j = 0; j < y * size; j += size) 
-                { 
-                    
-                    grains[i/size].Add(new Sand(i,j, size));
-                
-                }
-            }
+            grains = new List<Grain>();
         }
 
         internal override void Update()
         {
-            int mouseX = Game1.Instance.mouseState.Position.X;
-            int mouseY = Game1.Instance.mouseState.Position.Y;
-
-            Vector2 hoverOver = new Vector2(mouseX/grainSize,mouseY/grainSize);
-            if(Game1.Instance.mouseState.LeftButton == ButtonState.Pressed) 
-            {
-                try {
-                    grains[(int)hoverOver.X][(int)hoverOver.Y].Update();
-                }
-                catch(System.ArgumentOutOfRangeException)
-                {
-
-                }
-            }
-            if (Game1.Instance.kh.keyPressed(Keys.R))
-            {
-                foreach (List<Sand> gra in grains)
-                {
-                    foreach (Sand gra2 in gra)
-                    {
-                        gra2.Reset();
-                    }
-                }
-            }
             
+            skm.Update(this);
         }
 
         internal override void Draw()
         {
-            foreach (List<Sand> gra in grains)
+            foreach (Grain g in grains)
             {
-                foreach (Sand gra2 in gra)
-                {
-                    gra2.Draw();
-                }
+                g.Draw();
             }
         }
     }

@@ -16,7 +16,8 @@ namespace ZenGarden
         public static Game1 Instance => _instance;
         public GameTime CurrentGameTime { get; set; }
         public MouseState mouseState { get; set; }
-        internal KeyHandler kh;
+        public MouseState previousMouseState;
+        internal KeyboardHandler kh;
 
 
         //graphics
@@ -27,7 +28,7 @@ namespace ZenGarden
 
         //objects
         internal UDHandler uds;
-        private Sand s;
+        private Grain s;
 
 
         public Game1()
@@ -37,7 +38,7 @@ namespace ZenGarden
             graphicsHandler.init();
             IsMouseVisible = true;
             uds = new UDHandler();
-            kh = new KeyHandler();
+            kh = new KeyboardHandler();
 
         }
 
@@ -59,14 +60,15 @@ namespace ZenGarden
             int w = GraphicsDevice.Viewport.Width;
             int h = GraphicsDevice.Viewport.Height;
 
-            int sandSize = 100;
+            int sandSize = 50;
 
-            uds.addUD(new Sandbox(w/sandSize + sandSize,h/sandSize + sandSize,sandSize));
+            uds.addUD(new Sandbox(sandSize));
 
         }
 
         protected override void Update(GameTime gameTime)
         {
+            kh.Update();
             CurrentGameTime = gameTime;
             mouseState = Mouse.GetState();
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
@@ -75,6 +77,7 @@ namespace ZenGarden
             KeyboardState state = Keyboard.GetState();
 
             uds.Update();
+            previousMouseState = mouseState;
 
             base.Update(gameTime);
         }

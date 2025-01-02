@@ -13,7 +13,7 @@ namespace ZenGarden.Content.src.structures
 {
     internal class GraphicsHandler
     {
-        string assetPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "WhatAmI");
+        string assetPath = Path.Combine(Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.Parent.FullName, "Content\\assets");
 
 
         Matrix scale = Matrix.CreateScale(1, 1, 1);
