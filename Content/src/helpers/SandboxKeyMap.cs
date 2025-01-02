@@ -30,7 +30,7 @@ namespace ZenGarden.Content.src.helpers
                         break;
                     case "koi":
                         if (pms.LeftButton != ButtonState.Pressed)
-                            s.decorations.Add(new Decor(mouseX, mouseY, "decor\\fish.png", "koi"));
+                            s.decorations.Add(new Koi(mouseX, mouseY, "decor\\fish.png", "koi"));
                         break;
 
                     default:
