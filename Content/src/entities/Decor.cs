@@ -74,11 +74,12 @@ namespace ZenGarden.Content.src.entities
                     possibleDirections.Add(new Vector2(0, 1));
 
 
+                if(possibleDirections.Count > 0) { 
+                    pos += possibleDirections[0];
 
-
-                foreach(Vector2 direction in possibleDirections)
-                    pos += direction;
-            }
+                    Console.WriteLine(possibleDirections[0]);
+                }
+                }
         }
        
 

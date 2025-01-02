@@ -14,6 +14,10 @@ namespace ZenGarden.Content.src.helpers
             int mouseY = Game1.Instance.mouseState.Position.Y;
 
 
+            int screenWidth = Game1.Instance.GraphicsDevice.Viewport.Width;
+            int screenHeight = Game1.Instance.GraphicsDevice.Viewport.Height;
+
+
             MouseState ms = Game1.Instance.mouseState;
             MouseState pms = Game1.Instance.previousMouseState;
             if(ms.LeftButton == ButtonState.Pressed) {
@@ -30,7 +34,7 @@ namespace ZenGarden.Content.src.helpers
                         break;
 
                     default:
-                        int xPos = mouseX - mouseX % s.grainSize;
+                        int xPos = mouseX - mouseX%s.grainSize;
                         int yPos = mouseY - mouseY % s.grainSize;
                         s.gh.addGrain(new Grain(xPos, yPos, s.grainSize, s.ds.col, s.ds.type));
                         break;

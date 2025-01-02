@@ -25,6 +25,7 @@ namespace ZenGarden.Content.src.helpers
                     grains[i/grainSize].Add(new Grain(i,j,grainSize,new Color(255,255,0), "lightSand"));
                 }
             }
+            Console.WriteLine((grains.Count, " ", grains[0].Count));
         }
 
 
@@ -55,7 +56,8 @@ namespace ZenGarden.Content.src.helpers
         {
             int i = (int)grain.pos.X / grainSize;
             int j = (int)grain.pos.Y / grainSize;
-            grains[i][j] = grain;
+            if(i >= 0 && j >= 0 && i < grains.Count && j < grains[i].Count) 
+                grains[i][j] = grain;
         }
             
         internal void Clear()
