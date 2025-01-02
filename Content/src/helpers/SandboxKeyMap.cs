@@ -17,24 +17,37 @@ namespace ZenGarden.Content.src.helpers
             MouseState ms = Game1.Instance.mouseState;
             MouseState pms = Game1.Instance.previousMouseState;
             if(ms.LeftButton == ButtonState.Pressed) {
-                int xPos = mouseX - mouseX%s.grainSize;
-                int yPos = mouseY - mouseY%s.grainSize;
-                s.grains.Add(new Grain(xPos,yPos, s.grainSize, s.ds.col));
+                switch (s.ds.type)
+                {
+                    case "pixel":
+                        int xPos = mouseX - mouseX % s.grainSize;
+                        int yPos = mouseY - mouseY % s.grainSize;
+                        s.grains.Add(new Grain(xPos, yPos, s.grainSize, s.ds.col));
+                        break;
+                    case "pFlower":
+                        if(pms.LeftButton != ButtonState.Pressed) 
+                            s.decorations.Add(new Decor(mouseX, mouseY, "decor\\pFlower.png"));
+                        break;
+                }
             }
 
 
 
             if (Game1.Instance.kh.keyPressed(Keys.L))
             {
-                s.ds.type = "lightSand";
+                s.ds.type = "pixel";
+                s.ds.col = new Color(255,255,0);
+
             }
             else if (Game1.Instance.kh.keyPressed(Keys.D))
             {
-                s.ds.type = "darkSand";
+                s.ds.type = "pixel";
+                s.ds.col = new Color(255,240,0);
             }
             else if (Game1.Instance.kh.keyPressed(Keys.W))
             {
-                s.ds.type = "water";
+                s.ds.type = "pixel";
+                s.ds.col = new Color(0,0,255);
             }
             else if (Game1.Instance.kh.keyPressed(Keys.F))
             {
@@ -43,11 +56,9 @@ namespace ZenGarden.Content.src.helpers
             else if (Game1.Instance.kh.keyPressed(Keys.R))
             {
                 s.grains.Clear();
+                s.decorations.Clear();
 
             }
-
-
-
         }
     }
 }

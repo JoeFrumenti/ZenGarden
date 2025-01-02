@@ -15,6 +15,7 @@ namespace ZenGarden.Content.src.helpers
     {
 
         internal List<Grain> grains;
+        internal List<Decor> decorations;
 
         internal int grainSize;
         private int width;
@@ -28,9 +29,9 @@ namespace ZenGarden.Content.src.helpers
         public Sandbox(int size)
         {
             grainSize = size;
-            ds = new drawState("darkSand", 1, new Color(255,255,0));
+            ds = new drawState("darkSand", 1, new Color(255,230,0));
             skm = new SandboxKeyMap();
-
+            decorations = new List<Decor>();
             grains = new List<Grain>();
         }
 
@@ -45,6 +46,10 @@ namespace ZenGarden.Content.src.helpers
             foreach (Grain g in grains)
             {
                 g.Draw();
+            }
+            foreach(Decor decor in decorations)
+            {
+                decor.Draw();
             }
         }
     }

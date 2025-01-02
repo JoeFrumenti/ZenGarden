@@ -60,7 +60,7 @@ namespace ZenGarden
             int w = GraphicsDevice.Viewport.Width;
             int h = GraphicsDevice.Viewport.Height;
 
-            int sandSize = 50;
+            int sandSize = 100;
 
             uds.addUD(new Sandbox(sandSize));
 
@@ -86,7 +86,7 @@ namespace ZenGarden
         {
             //inital stuff
             var keyboardState = Keyboard.GetState();
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Yellow);
 
             uds.Draw();
 
