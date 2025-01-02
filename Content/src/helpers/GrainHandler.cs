@@ -38,7 +38,9 @@ namespace ZenGarden.Content.src.helpers
         {
             int i = (int)pos.X/grainSize;
             int j = (int)pos.Y/grainSize;
-            return grains[i][j].getType();
+            if (0 <= i && i < grains.Count && 0 <= j && j < grains[i].Count)
+                return grains[i][j].getType();
+            return "none";
         }
         internal string getGrainType(int i, int j)
         {

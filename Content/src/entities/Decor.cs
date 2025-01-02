@@ -13,6 +13,7 @@ namespace ZenGarden.Content.src.entities
         private Vector2 org;
         Texture2D img;
         string type;
+        Random random;
 
         Thread thread;
 
@@ -20,6 +21,7 @@ namespace ZenGarden.Content.src.entities
         float swimTimer = 0;
         Vector2 swimDir = new Vector2(0,0);
         float koiSpeed = 100;
+        float swimWaitTimer = 0;
 
         public Decor(int x, int y, string filePath, string type)
         {
@@ -28,6 +30,7 @@ namespace ZenGarden.Content.src.entities
             img = Game1.Instance.graphicsHandler.generateTexture(filePath);
             org = new Vector2(img.Width / 2, img.Height / 2);
             this.type = type;
+            random = new Random();
         }
 
         private bool checkWater(Vector2 dir,Sandbox s)
@@ -40,11 +43,20 @@ namespace ZenGarden.Content.src.entities
                 
         }
 
+
         private void swim(Vector2 dir)
-        {
+        {   
             float deltaTime = (float)Game1.Instance.CurrentGameTime.ElapsedGameTime.TotalSeconds;
-            pos += dir * deltaTime * koiSpeed;
-            swimTimer -= deltaTime;
+            if(swimWaitTimer > 0)
+            {
+                swimWaitTimer -= deltaTime;
+                if(swimWaitTimer <= 0)
+                    swimTimer = 1;
+            }
+            if(swimTimer > 0) { 
+                pos += dir * deltaTime * koiSpeed;
+                swimTimer -= deltaTime;
+            }
             
         }
 
@@ -77,16 +89,15 @@ namespace ZenGarden.Content.src.entities
 
                     //Console.WriteLine(possibleDirections[0]);
                 
-                if(swimTimer <=0 && possibleDirections.Count > 0)
+                if(swimWaitTimer <=0 && swimTimer <=0 && possibleDirections.Count > 0)
                 {
-                    swimTimer = 1;
-                    swimDir = possibleDirections[0];
+                    swimWaitTimer = 1;
+                    swimDir = possibleDirections[random.Next(0,possibleDirections.Count)];
                 }
 
-                if(swimTimer > 0)
+                if(swimWaitTimer > 0 || swimTimer >0)
                 { 
                     swim(swimDir);
-                    Console.WriteLine(swimTimer);
                 }
             }
         }
