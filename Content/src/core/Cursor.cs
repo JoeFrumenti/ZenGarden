@@ -14,6 +14,9 @@ namespace ZenGarden.Content.src.core
     {
         MouseState mouseState;
         Texture2D mouseTexture;
+
+        public override string name => "Cursor";
+
         public Cursor()
         {
             mouseTexture = new Texture2D(Game1.Instance.spriteBatch.GraphicsDevice, 1, 1);

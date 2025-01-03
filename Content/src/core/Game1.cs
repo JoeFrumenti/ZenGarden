@@ -5,6 +5,7 @@ using ZenGarden.Content.src.core;
 using ZenGarden.Content.src.entities;
 using ZenGarden.Content.src.helpers;
 using ZenGarden.Content.src.structures;
+using ZenGarden.Content.src.ui;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace ZenGarden
@@ -61,6 +62,7 @@ namespace ZenGarden
             int sandSize = 50;
 
             uds.addUD(new Sandbox(sandSize));
+            uds.addUD(new SideBar());
             uds.addUD(new Cursor());
 
         }

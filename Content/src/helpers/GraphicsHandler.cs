@@ -61,6 +61,13 @@ namespace ZenGarden.Content.src.structures
             spriteBatch.Begin(transformMatrix: getScale());
             spriteBatch.End();
         }
+
+        internal Texture2D generateTexture(Color col)
+        {
+            Texture2D tex = new Texture2D(Game1.Instance.spriteBatch.GraphicsDevice, 1, 1);
+            tex.SetData(new[] { Color.White });
+            return tex;
+        }
         internal Texture2D generateTexture(string filePath)
         {
             try

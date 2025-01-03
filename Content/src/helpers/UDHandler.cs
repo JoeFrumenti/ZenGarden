@@ -26,7 +26,15 @@ namespace ZenGarden.Content.src.structures
             prepCache.Add(u);
         }
 
+        internal UD GetUD(string name)
+        {
+            foreach(UD u in uds) {
 
+                if (u.name == name) 
+                    return u;
+            }
+            return null;
+        }
 
         internal void moveCache()
         {

@@ -8,7 +8,7 @@ namespace ZenGarden.Content.src.entities
 {
     internal abstract class UD
     {
-        internal protected string name;
+        public abstract string name {get; }
         internal abstract void Update();
         internal abstract void Draw();
 

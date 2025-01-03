@@ -20,10 +20,12 @@ namespace ZenGarden.Content.src.helpers
         private int width;
         private int height;
 
+
         public drawState ds;
 
         private SandboxKeyMap skm;
 
+        public override string name => "Sandbox";
 
         public Sandbox(int size)
         {
@@ -56,6 +58,7 @@ namespace ZenGarden.Content.src.helpers
             {
                 decor.Draw();
             }
+
         }
     }
 }
