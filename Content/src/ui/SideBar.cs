@@ -24,7 +24,7 @@ namespace ZenGarden.Content.src.ui
         public SideBar()
         {
             height = Game1.Instance.GraphicsDevice.Viewport.Height;
-            openTex = Game1.Instance.graphicsHandler.generateTexture("ui\\openTab.png");
+            openTex  = Game1.Instance.graphicsHandler.generateTexture("ui\\openTab.png");
             closeTex = Game1.Instance.graphicsHandler.generateTexture("ui\\closeTab.png");
              
             closeButton = new Rectangle(width-50,height/2,50,50);
@@ -35,6 +35,7 @@ namespace ZenGarden.Content.src.ui
         {
             MouseState ms = Game1.Instance.mouseState;
             if(ms.LeftButton == ButtonState.Pressed && Game1.Instance.previousMouseState.LeftButton != ButtonState.Pressed) {
+
                 if(open) {
                     if(closeButton.Contains(ms.Position))
                         open = false;

@@ -41,7 +41,7 @@ namespace ZenGarden.Content.src.entities
             {
                 swimWaitTimer -= deltaTime;
                 if (swimWaitTimer <= 0)
-                    swimTimer = 1;
+                    swimTimer = (float)random.NextDouble() * 0.5f + 0.5f;
             }
             if (swimTimer > 0)
             {
